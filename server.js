@@ -6,7 +6,6 @@ const cors = require("cors");
 const { sequelize } = require("./models");
 require("dotenv").config();
 
-const port = 8080;
 const app = express();
 
 // JSON
@@ -20,7 +19,7 @@ app.use("/public", express.static(publicPathDirection));
 
 app.use("/api", router);
 
-app.listen(port, async () => {
+app.listen(process.env.PORT || 8080, async () => {
   console.log(`Server is running on ${port}`);
   try {
     await sequelize.authenticate();
