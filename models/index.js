@@ -9,17 +9,26 @@ const config = require(__dirname + "/../config/config.json")[env];
 // const config = require("../config/config")[env];
 
 const db = {};
-console.log(config.database);
+
 let sequelize;
 if (config.use_env_variable) {
   sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else {
   sequelize = new Sequelize(
-    config.database,
-    config.username,
-    config.password,
-    config
+    "beqshhptnfjgowelgvnz",
+    "utqqsiifwmsgwjfx",
+    "gZLRA4reha4twaPOJMJi",
+    {
+      host: "beqshhptnfjgowelgvnz-mysql.services.clever-cloud.com",
+      dialect: "mysql",
+    }
   );
+  // sequelize = new Sequelize(
+  //   config.database,
+  //   config.username,
+  //   config.password,
+  //   config
+  // );
 }
 
 // sequelize = new Sequelize(
