@@ -20,7 +20,7 @@ app.use("/public", express.static(publicPathDirection));
 app.use("/api", router);
 
 app.listen(process.env.PORT || 8080, async () => {
-  console.log(`Server is running on ${port}`);
+  console.log(`Server is running on ${process.env.PORT || 8080}`);
   try {
     await sequelize.authenticate();
     console.log("Connection database successfully.");
