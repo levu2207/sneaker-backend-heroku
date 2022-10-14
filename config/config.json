@@ -1,11 +1,10 @@
 {
   "development": {
-    "username": "root",
-    "password": "lethanhvu1991@123",
-    "database": "sneaker-shop",
-    "host": "localhost",
-    "dialect": "mysql",
-    "timezone": "+07:00"
+    "username": "utqqsiifwmsgwjfx",
+    "password": "gZLRA4reha4twaPOJMJi",
+    "database": "beqshhptnfjgowelgvnz",
+    "host": "beqshhptnfjgowelgvnz-mysql.services.clever-cloud.com",
+    "dialect": "mysql"
   },
   "test": {
     "username": "root",
@@ -19,7 +18,6 @@
     "password": "gZLRA4reha4twaPOJMJi",
     "database": "beqshhptnfjgowelgvnz",
     "host": "beqshhptnfjgowelgvnz-mysql.services.clever-cloud.com",
-    "dialect": "mysql",
-    "timezone": "+07:00"
+    "dialect": "mysql"
   }
 }
