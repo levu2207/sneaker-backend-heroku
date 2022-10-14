@@ -4,9 +4,32 @@ const { responseSuccess, responseError } = require("./customResponse");
 // get all order
 const getAllOrder = async (req, res) => {
   try {
-    const orderList = await Order.findAll();
-    if (orderList) {
-      res.status(200).send(responseSuccess(orderList, "Successfull!"));
+    let newOrderList = [];
+    const orderList = await Order.findAll({
+      order: [["createdAt", "DESC"]],
+      raw: true,
+    });
+
+    if (orderList.length === 0) return;
+
+    for (order of orderList) {
+      const details = await Detail.findAll({
+        where: {
+          orderId: order.id,
+        },
+        raw: true,
+      });
+
+      let newOrder = {
+        ...order,
+        orderItems: details,
+      };
+
+      newOrderList.push(newOrder);
+    }
+
+    if (newOrderList.length > 0) {
+      res.status(200).send(responseSuccess(newOrderList, "Successfull!"));
     } else {
       res.status(404).send(responseError(1, "Order not found!"));
     }
@@ -23,6 +46,7 @@ const getOrderById = async (req, res) => {
       where: {
         id,
       },
+      order: [["createdAt", "DESC"]],
       raw: true,
     });
 
@@ -53,6 +77,7 @@ const getOrderOfUser = async (req, res) => {
       where: {
         userId: userId,
       },
+      order: [["createdAt", "DESC"]],
       raw: true,
     });
 
