@@ -8,7 +8,10 @@ const {
   deleteOrder,
   updateOrder,
 } = require("../controllers/order.controller");
-const { authenticate } = require("../middlewares/auth/authenticate");
+const {
+  authenticate,
+  authenticateAndAdmin,
+} = require("../middlewares/auth/authenticate");
 const { authorize } = require("../middlewares/auth/authorize");
 const orderRouter = express.Router();
 
@@ -17,7 +20,7 @@ orderRouter.get("/", authenticate, authorize(["ADMIN"]), getAllOrder);
 orderRouter.get(
   "/users/:userId",
   authenticate,
-  authorize(["ADMIN"]),
+  authenticateAndAdmin,
   getOrderOfUser
 );
 
