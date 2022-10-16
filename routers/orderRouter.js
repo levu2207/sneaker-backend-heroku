@@ -17,12 +17,7 @@ const orderRouter = express.Router();
 
 orderRouter.get("/", authenticate, authorize(["ADMIN"]), getAllOrder);
 
-orderRouter.get(
-  "/users/:userId",
-  authenticate,
-  authenticateAndAdmin,
-  getOrderOfUser
-);
+orderRouter.get("/users/:userId", authenticateAndAdmin, getOrderOfUser);
 
 orderRouter.get("/:id", authenticate, authorize(["ADMIN"]), getOrderById);
 

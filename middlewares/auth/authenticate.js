@@ -24,13 +24,25 @@ const authenticate = (req, res, next) => {
 };
 
 const authenticateAndAdmin = (req, res, next) => {
-  authenticate(req, res, () => {
-    if (req.user.id == req.params.id || req.user.role === "ADMIN") {
-      next();
+  const token = req.headers.token;
+
+  try {
+    const decode = jwt.verify(token, process.env.JWT_ACCESS_KEY);
+    console.log(decode);
+    if (decode) {
+      req.user = decode;
+      console.log(req.params);
+      if (req.user.id == req.params.userId || req.user.role === "ADMIN") {
+        next();
+      } else {
+        res.status(403).send(responseError(1, "You are not allowed"));
+      }
     } else {
-      res.status(403).send(responseError(1, "You are not allowed"));
+      res.status(401).send(responseError(1, "You must login"));
     }
-  });
+  } catch (error) {
+    res.status(500).send(responseError(1, error.message));
+  }
 };
 
 module.exports = {
