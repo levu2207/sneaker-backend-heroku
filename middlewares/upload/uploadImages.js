@@ -38,6 +38,7 @@ const uploadProductImage = (req) => {
       cb(null, `./public/images/product`);
     },
     filename: function (req, file, cb) {
+      if (!file) return;
       var pathImageProduct = Date.now() + "_" + file.originalname;
       cb(null, pathImageProduct);
     },
