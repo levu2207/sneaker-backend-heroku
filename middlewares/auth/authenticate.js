@@ -11,7 +11,6 @@ const authenticate = (req, res, next) => {
 
   try {
     const decode = jwt.verify(token, process.env.JWT_ACCESS_KEY);
-    console.log(decode);
     if (decode) {
       req.user = decode;
       return next();
@@ -32,7 +31,7 @@ const authenticateAndAdmin = (req, res, next) => {
     if (decode) {
       req.user = decode;
       console.log(req.params);
-      if (req.user.id == req.params.userId || req.user.role === "ADMIN") {
+      if (req.user.id == req.params.userId || req.user.id == req.params.id || req.user.role === "ADMIN") {
         next();
       } else {
         res.status(403).send(responseError(1, "You are not allowed"));
