@@ -391,15 +391,15 @@ const updateProduct = async (req, res) => {
       await productUpdated.save();
 
       const productId = productUpdated.dataValues.id;
-      console.log("productId:", productId);
 
-      await deleteOldImage(productId);
-
-      await Image.destroy({
-        where: {
-          productId,
-        },
-      });
+      if (files) {
+        await deleteOldImage(productId);
+        await Image.destroy({
+          where: {
+            productId,
+          },
+        });
+      }
 
       // update new URL image to database
       const imageArr = await uploadProductImages(req, res, productId);

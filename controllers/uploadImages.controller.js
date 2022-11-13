@@ -17,11 +17,7 @@ const uploadProductImages = async (req, res, id) => {
       });
     });
 
-    if (imageArr.length > 0) {
-      return imageArr;
-    } else {
-      res.status(403).send(responseError(1, "Bad request"));
-    }
+    return imageArr;
   } catch (error) {
     res.status(500).send(responseError(1, error.message));
   }
