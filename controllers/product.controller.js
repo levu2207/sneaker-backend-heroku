@@ -366,7 +366,7 @@ const getProductById = async (req, res) => {
 // Update Product
 const updateProduct = async (req, res) => {
   const { id } = req.params;
-  const { brand, name, description, sale, price, amount, categoryId } =
+  const { brand, name, description, sale, price, amount, categoryId, files } =
     req.body;
   try {
     const productUpdated = await Product.findOne({
